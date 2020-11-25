@@ -35,7 +35,13 @@
                 <v-container>
                   <v-row>
                     <v-col>
-                      <v-btn rounded color="red darken-4" dark width="100%">
+                      <v-btn
+                        rounded
+                        color="red darken-4"
+                        dark
+                        width="100%"
+                        @click="login({ std: id, checkpass: password })"
+                      >
                         로그인
                       </v-btn>
                     </v-col>
@@ -88,6 +94,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import FirstRegist from "../components/AboutLogin/FirstRegistPassword.vue";
 import ChangePassword from "../components/AboutLogin/ChangePassword.vue";
 export default {
@@ -105,7 +112,7 @@ export default {
     };
   },
   methods: {
-    // ...mapActions(["Login"])
+    ...mapActions(["login"]),
   },
 };
 </script>
