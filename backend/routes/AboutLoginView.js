@@ -26,16 +26,14 @@ router.post("/regist", (req, res) => {
         'UPDATE student SET password = "' +
           encryptedPassword +
           '" WHERE student_id = ' +
-          user.stdid +
-          ' and ssn = "' +
-          user.ssn +
-          '"',
+          user.stdid,
         (err, row) => {
           if (err) Errorthrow(res, err);
           res.json({
             success: true,
             message: "비밀번호 등록 성공!"
           });
+          console.log(user);
           connection.release();
         }
       );
@@ -75,6 +73,7 @@ router.post("/registcheck", (req, res) => {
             message: "테스트"
           });
         } else {
+          console.log(row, user);
           res.json({
             success: false,
             message:
@@ -122,6 +121,7 @@ router.post("/usercheck", (req, res) => {
           }
         });
         connection.release();
+        console.log(user, row);
       }
     );
   });
