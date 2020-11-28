@@ -59,14 +59,17 @@
                         <ChangePassword :regist.sync="change" />
                       </v-overlay>
                     </v-col>
-                    <v-col align="center" cols="6">
+                    <v-col align="center">
                       <v-btn
                         color="red darken-1"
                         class="white--text"
                         width="100%"
-                        @click="View = 'confirm'"
+                        @click="lookup = true"
                         >개인번호 조회</v-btn
                       >
+                      <v-overlay v-bind:dark="false" :value="lookup">
+                          <LookupId :lookup.sync="lookup" />
+                        </v-overlay>
                     </v-col>
                     <v-row>
                       <v-col align="center">
@@ -97,15 +100,18 @@
 import { mapActions } from "vuex";
 import FirstRegist from "../components/AboutLogin/FirstRegistPassword.vue";
 import ChangePassword from "../components/AboutLogin/ChangePassword.vue";
+import LookupId from "../components/AboutLogin/LookupId.vue";
 export default {
   components: {
     FirstRegist,
     ChangePassword,
+    LookupId,
   },
   data() {
     return {
       regist: false, //등록 폼 부를때 오버레이 효과로 사용하기 위한 함수
       change: false, //비번바꾸는 폼 부를때 오버레이 효과로 사용하기 위한 함수
+      lookup: false, //개인번호 조회시 오버레이 효과로 사용을 위한 함수
       id: "",
       password: "",
       View: "login",

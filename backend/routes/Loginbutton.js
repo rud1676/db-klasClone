@@ -7,7 +7,7 @@ router.post("/", (req, res) => {
     password: req.body.user.password
   };
   db.query(
-    'SELECT userid, password FROM users WHERE userid = "' + user.userid + '"',
+    'SELECT s_id, s_password FROM student WHERE s_id = "' + user.userid + '"',
     (err, row) => {
       if (err) {
         res.json({
