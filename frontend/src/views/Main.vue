@@ -4,7 +4,7 @@
       :collapse="!collapseOnScroll"
       :collapse-on-scroll="collapseOnScroll"
       absolute
-      color="deep-purple accent-4"
+      color="red darken-4"
       dark
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>

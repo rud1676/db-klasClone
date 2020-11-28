@@ -1,11 +1,16 @@
 <template>
-  <LectureList />
+  <v-conainer>
+    <LectureList />
+    <ProInfo />
+  </v-conainer>
 </template>
 <script>
 import LectureList from "./MainComponent/LectureList.vue";
+import ProInfo from "./MainComponent/stdProffessorInfo.vue";
 export default {
   components: {
     LectureList,
+    ProInfo,
   },
 };
 </script>

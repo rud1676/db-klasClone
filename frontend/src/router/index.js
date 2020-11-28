@@ -15,7 +15,6 @@ const onlyAuthor = (to, from, next) => {
         stdid: store.state.who
       })
       .then((res) => {
-        console.log(res.data);
         if (res) {
           res.data.lectures.forEach((lecutre) => {
             store.state.LectureList.push(lecutre);

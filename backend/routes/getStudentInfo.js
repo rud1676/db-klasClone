@@ -21,7 +21,6 @@ router.post("/lecturelist", (req, res) => {
         res.json({
           lectures: row
         });
-        console.log(row);
         connection.release();
       }
     );
