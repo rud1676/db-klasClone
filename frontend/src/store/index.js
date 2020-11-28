@@ -7,11 +7,17 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isLogin: false
+    isLogin: false,
+    who: "12345",
+    username: "",
+    LectureList: [],
+    professor: ""
   },
   mutations: {
-    loginSuccess(state) {
+    loginSuccess(state, payload) {
       state.isLogin = true;
+      state.who = payload.stdid;
+      state.username = payload.stdname;
     },
     loginFail(state) {
       state.isLogin = false;
@@ -29,8 +35,9 @@ export default new Vuex.Store({
         })
         .then((res) => {
           if (res.data.success == true) {
-            commit("loginSuccess");
-            router.push({ name: "Main" });
+            console.log(res);
+            commit("loginSuccess", res.data);
+            router.push({ path: "Main/" });
           }
           if (res.data.success == false) {
             alert(res.data.message);
@@ -38,8 +45,6 @@ export default new Vuex.Store({
           }
         })
         .catch(() => alert("error 관리자에게 문의하십시요"));
-      //login 시도
-      console.log(loginobj);
     }
   }
 });

@@ -17,9 +17,19 @@ const onlyAuthor = (to, from, next) => {
 const routes = [
   {
     path: "/",
+    redirect: "/Main/"
+  },
+  {
+    path: "/Main",
     name: "Main",
     beforeEnter: onlyAuthor,
-    component: Main
+    component: Main,
+    children: [
+      {
+        path: "/",
+        component: () => import("../components/main.vue")
+      }
+    ]
   },
   {
     path: "/LoginView",

@@ -1,8 +1,24 @@
 <template>
   <v-app>
-    <v-app-bar color="deep-purple" dark>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>Title</v-toolbar-title>
+    <v-app-bar
+      :collapse="!collapseOnScroll"
+      :collapse-on-scroll="collapseOnScroll"
+      absolute
+      color="deep-purple accent-4"
+      dark
+    >
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title
+        >{{ $store.state.who }} - {{ $store.state.username }}</v-toolbar-title
+      >
+
+      <v-spacer></v-spacer>
+      <v-checkbox
+        v-model="collapseOnScroll"
+        color="white"
+        hide-details
+      ></v-checkbox>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
@@ -10,48 +26,35 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <router-link to="/">
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-home</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Home</v-list-item-title>
-            </v-list-item>
-          </router-link>
-          <router-link to="/registclass">
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-account</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>수강신청</v-list-item-title>
-            </v-list-item>
-          </router-link>
-          <router-link to="/board">
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-account</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>강의별 공지사항</v-list-item-title>
-            </v-list-item>
-          </router-link>
-          <router-link to="/result">
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-account</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>성적 조회</v-list-item-title>
-            </v-list-item>
-          </router-link>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="$router.push({ name: 'LoginView' })">
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>수강신청</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>강의별 공지사항</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>성적 조회</v-list-item-title>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <!-- Sizes your content based upon application components -->
     <v-main>
-      <!-- Provides the application the proper gutter -->
-      <v-container fluid>
-        <!-- If using vue-router -->
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
     </v-main>
 
     <v-footer app>
@@ -64,7 +67,9 @@
 export default {
   data: () => ({
     drawer: false,
-    group: null
-  })
+    group: null,
+    who: "1234",
+    collapseOnScroll: true,
+  }),
 };
 </script>

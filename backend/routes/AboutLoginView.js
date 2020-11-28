@@ -23,9 +23,9 @@ router.post("/regist", (req, res) => {
     if (err) Errorthrow(res, err);
     bcrypt.hash(user.pass, null, null, (err, encryptedPassword) => {
       connection.query(
-        'UPDATE student SET password = "' +
+        'UPDATE student SET s_password = "' +
           encryptedPassword +
-          '" WHERE student_id = ' +
+          '" WHERE s_id = ' +
           user.stdid,
         (err, row) => {
           if (err) Errorthrow(res, err);
@@ -49,9 +49,9 @@ router.post("/registcheck", (req, res) => {
   db.getConnection((err, connection) => {
     if (err) Errorthrow(res, err);
     connection.query(
-      "SELECT student_id, password,ssn FROM student WHERE student_id = " +
+      "SELECT s_id, s_password,s_prime_no FROM student WHERE s_id = " +
         user.stdid +
-        ' and ssn = "' +
+        ' and s_prime_no = "' +
         user.ssn +
         '"',
       (err, row) => {
@@ -64,16 +64,16 @@ router.post("/registcheck", (req, res) => {
           });
         } else if (
           row[0] != undefined &&
-          row[0].student_id == user.stdid &&
-          row[0].ssn == user.ssn &&
-          row[0].password == "undefined"
+          row[0].s_id == user.stdid &&
+          row[0].s_prime_no == user.ssn &&
+          row[0].s_password == "undefined"
         ) {
           res.json({
             success: true,
+            std_id: row[0].std_id,
             message: "테스트"
           });
         } else {
-          console.log(row, user);
           res.json({
             success: false,
             message:
@@ -94,8 +94,7 @@ router.post("/usercheck", (req, res) => {
   db.getConnection((err, connection) => {
     if (err) Errorthrow(res, err);
     connection.query(
-      "SELECT student_id, password FROM student WHERE student_id = " +
-        user.stdid,
+      "SELECT s_id, s_name, s_password FROM student WHERE s_id = " + user.stdid,
       (err, row) => {
         if (err) Errorthrow(res, err);
         if (row[0] == undefined) {
@@ -107,10 +106,12 @@ router.post("/usercheck", (req, res) => {
           connection.release();
           return;
         }
-        bcrypt.compare(user.checkpass, row[0].password, (err, check) => {
+        bcrypt.compare(user.checkpass, row[0].s_password, (err, check) => {
           if (check) {
             res.json({
               message: "미션... 성공!",
+              stdid: row[0].s_id,
+              stdname: row[0].s_name,
               success: true
             });
           } else {
@@ -121,7 +122,6 @@ router.post("/usercheck", (req, res) => {
           }
         });
         connection.release();
-        console.log(user, row);
       }
     );
   });
