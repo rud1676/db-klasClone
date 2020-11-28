@@ -11,7 +11,7 @@ export default new Vuex.Store({
     who: "12345",
     username: "",
     LectureList: [],
-    professor: ""
+    professor: null
   },
   mutations: {
     loginSuccess(state, payload) {

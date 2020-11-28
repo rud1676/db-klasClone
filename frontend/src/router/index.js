@@ -21,6 +21,16 @@ const onlyAuthor = (to, from, next) => {
           });
         }
       });
+    axios
+      .post("/api/std/professor", {
+        stdid: store.state.who
+      })
+      .then((res) => {
+        if (res) {
+          store.state.professor = JSON.parse(JSON.stringify(res.data.pinfo[0]));
+        }
+        console.log(store.state.professor);
+      });
     next();
   }
 };

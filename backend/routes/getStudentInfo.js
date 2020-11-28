@@ -27,4 +27,22 @@ router.post("/lecturelist", (req, res) => {
   });
 });
 
+router.post("/professor", (req, res) => {
+  const stdid = req.body.stdid;
+  db.getConnection((err, connection) => {
+    if (err) Errorthrow(res, err);
+    connection.query(
+      "select p.p_name , p.p_sex,p.p_tel_no,p.p_e_mail from student as s join professor as p on p.p_id = s.p_id where s_id = " +
+        stdid,
+      (err, row) => {
+        if (err) Errorthrow(res, err);
+        res.json({
+          pinfo: row
+        });
+        connection.release();
+      }
+    );
+  });
+});
+
 module.exports = router;

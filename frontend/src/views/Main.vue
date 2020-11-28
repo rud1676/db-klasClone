@@ -53,9 +53,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <v-main>
-      <router-view></router-view>
-    </v-main>
+    <router-view></router-view>
 
     <v-footer app>
       <!-- -->
@@ -68,7 +66,6 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
-    who: "null",
     collapseOnScroll: true,
   }),
 };

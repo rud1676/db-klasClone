@@ -1,8 +1,8 @@
 <template>
-  <v-conainer>
+  <v-main>
     <LectureList />
     <ProInfo />
-  </v-conainer>
+  </v-main>
 </template>
 <script>
 import LectureList from "./MainComponent/LectureList.vue";
