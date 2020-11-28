@@ -26,13 +26,15 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item @click="$router.push({ name: 'Main' })">
+          <v-list-item
+            @click="$router.push({ name: 'childmain' }).catch(() => {})"
+          >
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title>홈 화면</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="$router.push({ name: 'LoginView' })">
+          <v-list-item @click="$router.push({ name: 'enrolment' })">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
@@ -53,7 +55,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <router-view></router-view>
+    <router-view :key="$route.fullPath"></router-view>
 
     <v-footer app>
       <!-- -->
@@ -65,8 +67,11 @@
 export default {
   data: () => ({
     drawer: false,
-    group: null,
+    group: 0,
     collapseOnScroll: true,
   }),
+  computed: {},
+  created() {},
+  methods: {},
 };
 </script>

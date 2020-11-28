@@ -16,6 +16,9 @@ const onlyAuthor = (to, from, next) => {
       })
       .then((res) => {
         if (res) {
+          while (store.state.LectureList.length != 0) {
+            store.state.LectureList.pop();
+          }
           res.data.lectures.forEach((lecutre) => {
             store.state.LectureList.push(lecutre);
           });
@@ -48,7 +51,13 @@ const routes = [
     children: [
       {
         path: "/",
-        component: () => import("../components/main.vue")
+        name: "childmain",
+        component: () => import("../components/MainComponent/main.vue")
+      },
+      {
+        path: "/enrolment",
+        name: "enrolment",
+        component: () => import("../components/Enrolment/main.vue")
       }
     ]
   },

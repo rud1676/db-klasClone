@@ -5,8 +5,8 @@
   </v-main>
 </template>
 <script>
-import LectureList from "./MainComponent/LectureList.vue";
-import ProInfo from "./MainComponent/stdProffessorInfo.vue";
+import LectureList from "./LectureList.vue";
+import ProInfo from "./stdProffessorInfo.vue";
 export default {
   components: {
     LectureList,
