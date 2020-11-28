@@ -126,4 +126,45 @@ router.post("/usercheck", (req, res) => {
     );
   });
 });
+router.post("/lookup", (req, res) => {
+  const user = {
+    name: req.body.user.name, //이름
+    prime: req.body.user.prime //주민번호 앞자리
+  };
+  db.getConnection((err, connection) => {
+    if (err) Errorthrow(res, err);
+    connection.query(
+      "SELECT s_id, s_name, s_sex, grade, d_code FROM student WHERE s_name = " +
+        '"' +
+        user.name +
+        '"' +
+        ' and s_prime_no = "' +
+        user.prime +
+        '"',
+      (err, row) => {
+        if (err) Errorthrow(res, err);
+        if (row[0] == undefined) {
+          res.json({
+            message:
+              "주민번호랑 매치되는 학번이 존재하지 않습니다. 확인해보시거나 관리처로 전화하여 주십시요..",
+            success: false
+          });
+        } else {
+          var msg =
+            "이름: " +
+            row[0].s_name +
+            " \n학번: " +
+            row[0].s_id +
+            " \n성별: " +
+            row[0].s_sex;
+          console.log(msg);
+          res.json({
+            success: true,
+            message: msg
+          });
+        }
+      }
+    );
+  });
+});
 module.exports = router;
