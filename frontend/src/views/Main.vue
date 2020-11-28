@@ -58,7 +58,12 @@
     <router-view :key="$route.fullPath"></router-view>
 
     <v-footer app>
-      <!-- -->
+      <v-col class="text-center red darken-1" cols="12">
+        <p class="white--text mb-0">
+          서울시 노원구 광운로 20 (월계동 447-1) 광운대학교(01897) 대표전화<br />
+          02.940.5114 COPYRIGHTⓒKWANGWOON UNIVERSITY. ALL RIGHTS RESERVED
+        </p>
+      </v-col>
     </v-footer>
   </v-app>
 </template>
