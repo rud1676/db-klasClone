@@ -68,7 +68,7 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
-    who: "1234",
+    who: "null",
     collapseOnScroll: true,
   }),
 };

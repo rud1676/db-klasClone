@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store/index.js";
 import Main from "../views/Main.vue";
-
+import axios from "axios";
 Vue.use(VueRouter);
 
 const onlyAuthor = (to, from, next) => {
@@ -10,6 +10,18 @@ const onlyAuthor = (to, from, next) => {
   if (store.state.isLogin === false) {
     next("/Loginview");
   } else {
+    axios
+      .post("/api/std/lecturelist", {
+        stdid: store.state.who
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res) {
+          res.data.lectures.forEach((lecutre) => {
+            store.state.LectureList.push(lecutre);
+          });
+        }
+      });
     next();
   }
 };
