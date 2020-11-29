@@ -2,11 +2,10 @@
 //mysql 연동 - connection 객체 생성
 var mysql = require("mysql");
 var db = mysql.createPool({
-  connectionLimit: 5,
-  host: "localhost",
+  host: "34.123.115.114",
   port: 3306,
-  user: "root",
-  password: "pji123",
+  user: "user1",
+  password: "1111",
   database: "kw"
 });
 // Connect

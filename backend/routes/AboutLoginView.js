@@ -91,6 +91,7 @@ router.post("/usercheck", (req, res) => {
     stdid: req.body.user.std,
     checkpass: req.body.user.checkpass
   };
+  console.log(user);
   db.getConnection((err, connection) => {
     if (err) Errorthrow(res, err);
     connection.query(

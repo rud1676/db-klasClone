@@ -16,6 +16,7 @@ const onlyAuthor = (to, from, next) => {
       })
       .then((res) => {
         if (res) {
+          console.log(res);
           while (store.state.LectureList.length != 0) {
             store.state.LectureList.pop();
           }
@@ -32,7 +33,6 @@ const onlyAuthor = (to, from, next) => {
         if (res) {
           store.state.professor = JSON.parse(JSON.stringify(res.data.pinfo[0]));
         }
-        console.log(store.state.professor);
       });
     next();
   }

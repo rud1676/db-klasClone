@@ -39,9 +39,9 @@ export default new Vuex.Store({
           user: loginobj
         })
         .then((res) => {
+          console.log(res);
           if (res.data.success == true) {
             //성공시 토큰이 생김
-            console.log(res);
             commit("loginSuccess", res.data);
             router.push({ path: "Main/" });
           }
