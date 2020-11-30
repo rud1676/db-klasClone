@@ -12,13 +12,16 @@ const Errorthrow = (res, err) => {
 router.get("/", (req, res) => {
   db.getConnection((err, connection) => {
     if (err) Errorthrow(res, err);
-    connection.query("select * from lecture", (err, row) => {
-      if (err) Errorthrow(res, err);
-      res.json({
-        lectures: row
-      });
-      connection.release();
-    });
+    connection.query(
+      "select * from lecture as l join professor as p on p.p_id=l.p_id",
+      (err, row) => {
+        if (err) Errorthrow(res, err);
+        res.json({
+          lectures: row
+        });
+        connection.release();
+      }
+    );
   });
 });
 router.post("/stdlec", (req, res) => {
@@ -26,7 +29,7 @@ router.post("/stdlec", (req, res) => {
   db.getConnection((err, connection) => {
     if (err) Errorthrow(res, err);
     connection.query(
-      "select * from student_lecture as s join lecture as l on l.lecture_code = s.lecture_code where s.class_semester='" +
+      "select * from student_lecture as s inner join lecture as l on l.lecture_code = s.lecture_code inner join professor as p on l.p_id = p.p_id where s.class_semester='" +
         std.semester +
         "' and s_id = '" +
         std.stdid +
@@ -49,7 +52,7 @@ router.post("/submit", (req, res) => {
 
   db.getConnection((err, connection) => {
     if (err) Errorthrow(res, err);
-    console.log("test");
+    console.log(semester);
     connection.query(
       "SELECT s_id, lecture_code from student_lecture where s_id='" +
         std +
@@ -67,7 +70,7 @@ router.post("/submit", (req, res) => {
             "insert into student_lecture values('" +
               std +
               "', '" +
-              stdlectures.lecture_code +
+              lecture.lecture_code +
               "',0,'" +
               semester +
               "')",

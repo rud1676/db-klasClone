@@ -8,16 +8,18 @@
     >
       <v-list-item-content>
         <v-list-item-title
-          >{{ lecture.lecture_name }} --
-          {{ lecture.lecture_code }}</v-list-item-title
-        >
+          >{{ lecture.lecture_name }} -- {{ lecture.lecture_code }}
+        </v-list-item-title>
         <v-list-item-subtitle
           >{{ lecture.lecture_time1 }} ~ {{ lecture.lecture_time2 }}
           {{ lecture.lecture_room }}
         </v-list-item-subtitle>
       </v-list-item-content>
       <v-spacer></v-spacer>
-      <p class="pt-5 mr-10">{{ lecture.lecture_classification }}</p>
+      <p class="pt-5 mr-10">
+        <strong>{{ lecture.p_name }}</strong> |
+        {{ lecture.lecture_classification }}
+      </p>
       <v-btn
         color="red darken-1"
         class="white--text font-weight-thin"
@@ -31,15 +33,19 @@
       <v-list-item-content>
         <v-list-item-title
           ><strong>{{ lecture.id }}.</strong> {{ lecture.lecture_name }} --
-          {{ lecture.lecture_code }}</v-list-item-title
-        >
+          {{ lecture.lecture_code }} -
+        </v-list-item-title>
         <v-list-item-subtitle
           >{{ lecture.lecture_time1 }} ~ {{ lecture.lecture_time2 }}
           {{ lecture.lecture_room }}</v-list-item-subtitle
         >
       </v-list-item-content>
       <v-spacer></v-spacer>
-      <p class="pt-5 mr-10">{{ lecture.lecture_classification }}</p>
+      <p class="pt-5 mr-10">
+        <strong>{{ lecture.p_name }}</strong> |{{
+          lecture.lecture_classification
+        }}
+      </p>
       <v-btn
         color="red darken-3"
         class="white--text font-weight-thin"
@@ -47,7 +53,7 @@
         >수강 취소</v-btn
       >
     </v-list-item>
-    <v-row class="justify-center mt-5">
+    <v-row class="pb-5 justify-center mt-5">
       <v-btn
         width="80%"
         color="red darken-1"
@@ -110,6 +116,7 @@ export default {
   },
   mounted: function () {
     axios.get("/api/enrol/").then((res) => {
+      console.log(res.data);
       res.data.lectures.forEach((lecture) => {
         this.LectureList.push(lecture);
       });

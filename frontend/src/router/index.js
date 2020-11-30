@@ -58,6 +58,11 @@ const routes = [
         path: "/enrolment",
         name: "enrolment",
         component: () => import("../components/Enrolment/main.vue")
+      },
+      {
+        path: "/score",
+        name: "score",
+        component: () => import("../components/ScoreComponents/main.vue")
       }
     ]
   },

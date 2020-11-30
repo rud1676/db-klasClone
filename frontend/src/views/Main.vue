@@ -3,7 +3,7 @@
     <v-app-bar
       :collapse="!collapseOnScroll"
       :collapse-on-scroll="collapseOnScroll"
-      absolute
+      fixed
       color="red darken-4"
       dark
     >
@@ -46,7 +46,7 @@
             </v-list-item-icon>
             <v-list-item-title>강의별 공지사항</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item @click="$router.push({ name: 'score' })">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
@@ -56,7 +56,6 @@
       </v-list>
     </v-navigation-drawer>
     <router-view :key="$route.fullPath"></router-view>
-
     <v-footer class="text-center red darken-1" app>
       <v-col cols="12">
         <p class="white--text mb-0">

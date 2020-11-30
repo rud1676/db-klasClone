@@ -8,9 +8,9 @@
     >
       <v-list-item-content>
         <v-list-item-title
-          >{{ lecture.lecture_name }} --
-          {{ lecture.lecture_code }}</v-list-item-title
+          ><strong>{{ lecture.lecture_name }}</strong></v-list-item-title
         >
+        <v-list-item-subtitle>{{ lecture.p_name }}</v-list-item-subtitle>
       </v-list-item-content>
       <v-btn class="mr-5" color="red darken-1 white--text" v-on:click.stop
         >공지사항</v-btn
