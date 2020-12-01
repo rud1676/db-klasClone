@@ -1,69 +1,55 @@
 <template>
-  <v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">Name</th>
-          <th class="text-left">Calories</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in desserts" :key="item.name">
-          <td>{{ item.name }}</td>
-          <td>{{ item.calories }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+  <v-card class="mt-14" width="80%" style="margin: auto">
+    <v-card-title class="font-weight-bold">학점 리스트</v-card-title>
+    <v-simple-table>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">학정번호</th>
+            <th class="text-left">과목</th>
+            <th class="text-left">분류</th>
+            <th class="text-left">학점</th>
+            <th class="text-left">학기</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="lecture in scorelist" :key="lecture.lecture_code">
+            <td>{{ lecture.lecture_code }}</td>
+            <td>{{ lecture.lecture_name }}</td>
+            <td>{{ lecture.lecture_classification }}</td>
+            <td>{{ lecture.score }}</td>
+            <td>{{ lecture.class_semester }}</td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+  </v-card>
 </template>
 
 <script>
+import store from "../../store/index.js";
+import axios from "axios";
 export default {
   data() {
     return {
-      desserts: [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-        },
-        {
-          name: "Donut",
-          calories: 452,
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-        },
-      ],
+      scorelist: [],
     };
+  },
+  mounted: function () {
+    axios
+      .post("/api/score/", {
+        stdid: store.state.who,
+      })
+      .then((res) => {
+        this.scorelist = res.data.lectures;
+        this.scorelist.sort((a, b) =>
+          a.class_semester >= b.class_semester
+            ? -1
+            : a.class_semester < b.class_semester
+            ? 1
+            : 0
+        );
+      });
   },
 };
 </script>

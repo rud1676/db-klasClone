@@ -8,9 +8,26 @@ const Errorthrow = (res, err) => {
   });
   throw err;
 };
-
+router.post("/", (req, res) => {
+  const stdid = req.body.stdid;
+  db.getConnection((err, connection) => {
+    if (err) Errorthrow(res, err);
+    connection.query(
+      "select l.lecture_code, l.lecture_name, s.score, s.class_semester, l.lecture_classification, p.p_name from student_lecture as s inner join lecture as l on l.lecture_code = s.lecture_code inner join professor as p on l.p_id = p.p_id where s.s_id = '" +
+        stdid +
+        "'",
+      (err, row) => {
+        if (err) Errorthrow(res, err);
+        res.json({
+          lectures: row
+        });
+      }
+    );
+  });
+});
+/*
 //router 이름은 /Score로 임시로 적어놓음
-router.post("/Score", (req, res) => {
+router.post("/", (req, res) => {
   const stdid = req.body.stdid;
   db.getConnection((err, connection) => {
     var sql_student = `select D.d_name, S.s_id, S.s_name, S.grade, P.p_name 
@@ -106,16 +123,16 @@ router.post("/Score", (req, res) => {
         }
 
         res.json({
-          s_info: s_info,
-          score_info: score_info,
-          ap_major: ap_major,
-          ap_normal: ap_normal,
-          ap_sum: ap_sum,
-          aq_major: aq_major,
-          aq_normal: aq_normal,
-          aq_sum: aq_sum,
-          ap_gpa: ap_gpa,
-          aq_gpa: aq_gpa
+          s_info: s_info[0],
+          score_info: score_info[0],
+          ap_major: ap_major[0],
+          ap_normal: ap_normal[0],
+          ap_sum: ap_sum[0],
+          aq_major: aq_major[0],
+          aq_normal: aq_normal[0],
+          aq_sum: aq_sum[0],
+          ap_gpa: ap_gpa[0],
+          aq_gpa: aq_gpa[0]
         });
 
         connection.release();
@@ -123,5 +140,5 @@ router.post("/Score", (req, res) => {
     );
   });
 });
-
+*/
 module.exports = router;

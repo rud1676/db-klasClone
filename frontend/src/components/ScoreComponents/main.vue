@@ -1,19 +1,17 @@
 <template>
   <v-main>
-    <AllScore></AllScore>
+    <AllSocre></AllSocre>
   </v-main>
 </template>
 <script>
-export default {
-  components: {},
-};
-</script>
-import AllSocre from "./Alscore.vue";
+import AllSocre from "./Allscore.vue";
 export default {
   components: {
-    AllScore,
+    AllSocre,
   },
 };
+</script>
+
 <style scoped>
 .my-event {
   overflow: hidden;

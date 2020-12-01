@@ -16,7 +16,7 @@ router.post("/lecturelist", (req, res) => {
     connection.query(
       "select l.lecture_code, l.lecture_name, p.p_name from student_lecture as s inner join lecture as l on l.lecture_code = s.lecture_code inner join professor as p on l.p_id = p.p_id where s.s_id = '" +
         stdid +
-        "'",
+        "' and s.class_semester='2020-2'",
       (err, row) => {
         if (err) Errorthrow(res, err);
         res.json({

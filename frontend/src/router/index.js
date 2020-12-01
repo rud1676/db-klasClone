@@ -16,7 +16,6 @@ const onlyAuthor = (to, from, next) => {
       })
       .then((res) => {
         if (res) {
-          console.log(res);
           while (store.state.LectureList.length != 0) {
             store.state.LectureList.pop();
           }
