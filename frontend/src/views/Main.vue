@@ -40,7 +40,7 @@
             </v-list-item-icon>
             <v-list-item-title>수강신청</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item @click="$router.push({ name: 'notice' })">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
@@ -72,10 +72,10 @@ export default {
   data: () => ({
     drawer: false,
     group: 0,
-    collapseOnScroll: true,
+    collapseOnScroll: true
   }),
   computed: {},
   created() {},
-  methods: {},
+  methods: {}
 };
 </script>

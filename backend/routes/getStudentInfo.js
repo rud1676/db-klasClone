@@ -8,15 +8,32 @@ const Errorthrow = (res, err) => {
   });
   throw err;
 };
-
+router.post("/noticelist", (req, res) => {
+  const stdid = req.body.stdid;
+  db.getConnection((err, connection) => {
+    if (err) Errorthrow(res, err);
+    connection.query(
+      "select l.lecture_name, n.notice_title, n.notice_description, n.notice_create from student_lecture as s join lecture as l on s.lecture_code = l.lecture_code join topic_notice as n on l.lecture_code = n.lecture_code where s.s_id = " +
+        stdid +
+        " order by n.notice_create desc",
+      (err, row) => {
+        if (err) Errorthrow(res, err);
+        res.json({
+          notices: row
+        });
+        connection.release();
+      }
+    );
+  });
+});
 router.post("/lecturelist", (req, res) => {
   const stdid = req.body.stdid;
   db.getConnection((err, connection) => {
     if (err) Errorthrow(res, err);
     connection.query(
-      "select l.lecture_code, l.lecture_name, p.p_name from student_lecture as s inner join lecture as l on l.lecture_code = s.lecture_code inner join professor as p on l.p_id = p.p_id where s.s_id = '" +
+      "select lecture_code, lecture_name, p_name from v_student_Lecture_info where s_id = '" +
         stdid +
-        "' and s.class_semester='2020-2'",
+        "' and class_semester='2020-2'",
       (err, row) => {
         if (err) Errorthrow(res, err);
         res.json({

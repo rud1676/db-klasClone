@@ -25,6 +25,21 @@ const onlyAuthor = (to, from, next) => {
         }
       });
     axios
+      .post("/api/std/noticelist", {
+        stdid: store.state.who
+      })
+      .then((res) => {
+        if (res) {
+          console.log(res);
+          while (store.state.NoticeList.length != 0) {
+            store.state.NoticeList.pop();
+          }
+          res.data.notices.forEach((notice) => {
+            store.state.NoticeList.push(notice);
+          });
+        }
+      });
+    axios
       .post("/api/std/professor", {
         stdid: store.state.who
       })
@@ -57,6 +72,11 @@ const routes = [
         path: "/enrolment",
         name: "enrolment",
         component: () => import("../components/Enrolment/main.vue")
+      },
+      {
+        path: "/notice",
+        name: "notice",
+        component: () => import("../components/Notice/main.vue")
       },
       {
         path: "/score",

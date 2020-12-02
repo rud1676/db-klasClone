@@ -16,7 +16,8 @@ export default new Vuex.Store({
       p_sex: "남",
       p_tel_no: "010-0000-0000",
       p_e_mail: "rud1676@naver.com"
-    }
+    },
+    NoticeList: []
   },
   mutations: {
     loginSuccess(state, payload) {

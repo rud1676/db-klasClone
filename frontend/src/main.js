@@ -4,9 +4,11 @@ import vuetify from "./plugins/vuetify";
 import router from "./router";
 import store from "./store";
 import axios from "axios";
+import VueChartJs from "vue-chartjs";
+
+Vue.use(VueChartJs);
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
-
 new Vue({
   vuetify,
   router,

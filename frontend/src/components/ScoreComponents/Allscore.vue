@@ -32,17 +32,21 @@ import axios from "axios";
 export default {
   data() {
     return {
-      scorelist: [],
+      scorelist: []
     };
   },
-  mounted: function () {
+  mounted: function() {
     axios
       .post("/api/score/", {
-        stdid: store.state.who,
+        stdid: store.state.who
       })
       .then((res) => {
         this.scorelist = res.data.lectures;
-        this.scorelist.sort((a, b) =>
+        console.log(this.scorelist);
+        this.scorelist.sort((
+          a,
+          b //학기별로 오름차순 정렬
+        ) =>
           a.class_semester >= b.class_semester
             ? -1
             : a.class_semester < b.class_semester
@@ -50,6 +54,6 @@ export default {
             : 0
         );
       });
-  },
+  }
 };
 </script>

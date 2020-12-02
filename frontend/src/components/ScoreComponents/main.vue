@@ -1,14 +1,20 @@
 <template>
   <v-main>
     <AllSocre></AllSocre>
+    <LineChart />
   </v-main>
 </template>
 <script>
 import AllSocre from "./Allscore.vue";
+import LineChart from "./scoregraph.vue";
+
 export default {
   components: {
     AllSocre,
+    LineChart
   },
+
+  data: () => ({})
 };
 </script>
 

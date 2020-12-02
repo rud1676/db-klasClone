@@ -1,17 +1,20 @@
 <template>
   <v-main>
     <LectureList />
+    <topic></topic>
     <ProInfo />
   </v-main>
 </template>
 <script>
 import LectureList from "./LectureList.vue";
 import ProInfo from "./stdProffessorInfo.vue";
+import topic from "./topic.vue";
 export default {
   components: {
     LectureList,
     ProInfo,
-  },
+    topic
+  }
 };
 </script>
 
