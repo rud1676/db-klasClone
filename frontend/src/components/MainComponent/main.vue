@@ -9,12 +9,32 @@
 import LectureList from "./LectureList.vue";
 import ProInfo from "./stdProffessorInfo.vue";
 import topic from "./topic.vue";
+import axios from "axios";
+import store from "../../store/index.js";
 export default {
   components: {
     LectureList,
     ProInfo,
-    topic
-  }
+    topic,
+  },
+  mounted: function () {
+    axios
+      .post("/api/std/lecturelist", {
+        stdid: store.state.who,
+      })
+      .then((res) => {
+        if (res) {
+          console.log(store.state.LectureList);
+          while (store.state.LectureList.length != 0) {
+            store.state.LectureList.pop();
+          }
+          res.data.lectures.forEach((lecutre) => {
+            store.state.LectureList.push(lecutre);
+          });
+          console.log(store.state.LectureList);
+        }
+      });
+  },
 };
 </script>
 

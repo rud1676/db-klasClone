@@ -92,6 +92,7 @@ export default {
         this.LectureList.find((lecture) => lecture.lecture_code === lecturecode)
       );
       this.setid(this.stdLectureList);
+      console.log(this.stdLectureList);
     },
     cancel(lecturecode) {
       const delIndex = this.stdLectureList.indexOf(
@@ -99,6 +100,7 @@ export default {
       );
       this.stdLectureList.splice(delIndex, 1);
       this.setid(this.stdLectureList);
+      console.log(this.stdLectureList);
     },
     submit() {
       axios
